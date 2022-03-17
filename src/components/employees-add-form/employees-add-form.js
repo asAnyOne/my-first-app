@@ -14,6 +14,7 @@ export default class EmployeesAddForm extends Component {
       [e.target.name]: e.target.value,
     });
   };
+
   render() {
     const { name, salary } = this.state;
     return (
@@ -36,7 +37,21 @@ export default class EmployeesAddForm extends Component {
             value={salary}
             placeholder="Salary in $ ?"
           />
-          <button className="btn btn-outline-light">Add</button>
+          <button
+            className="btn btn-outline-light"
+            onClick={(e) => {
+              e.preventDefault();
+              if (this.state.name !== "" && this.state.salary !== "") {
+                this.props.onAddEmployee(this.state);
+                this.setState({
+                  name: "",
+                  salary: "",
+                });
+              }
+            }}
+          >
+            Add
+          </button>
         </form>
       </div>
     );
